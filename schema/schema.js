@@ -54,7 +54,7 @@ const BookType = new GraphQLObjectType({
 })
 
 const GadgetType = new GraphQLObjectType({
-    name: 'Gadgets',
+    name: 'Gadget',
     fields: () => ({
         id: {type: GraphQLString},
         name: {type: GraphQLString},
@@ -68,17 +68,29 @@ const RootQuery = new GraphQLObjectType({
     name: 'RootQueryType',
     fields: {
         book: {
-            type: BookType, 
-            args: {id:{type: GraphQLString}},
+            type: BookType,
+            args: { id:{type: GraphQLString}},
             resolve(parent, args) {
                 return _.find(books, {id: args.id})
             }
         },
-         gadget: {
+        books: { 
+            type: new GraphQLList(BookType),
+            resolve(parent, args) {
+                return books;
+            }
+        },
+        gadget: {
             type: GadgetType,
             args: {id:{type: GraphQLID}},
             resolve(parent, args) {
                 return _.find(gadgets, {id: args.id})
+            }
+        },
+        gadgets: { 
+            type: new GraphQLList(GadgetType),
+            resolve(parent, args) {
+                return gadgets;
             }
         }
     }
