@@ -13,6 +13,6 @@ app.use('/graphql', graphqlHTTP({
 
 
 app.listen(port, () => {
-    console.log(`Intro app listening at http://localhost:${port}`);
+    console.log(`Intro app listening at http://localhost:${port}/graphql`);
 });
 
